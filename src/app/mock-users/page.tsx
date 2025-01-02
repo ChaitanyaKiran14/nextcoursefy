@@ -36,7 +36,7 @@ const MockUsers = async  () => {
                             <button type="submit" className="bg-blue-500 text-white rounded p-3 mr-3" >Add User</button>
                         </form>
                     </div>         
-                    <ul className="space-y-3 p-6 m-4">
+                    <ul className="grid grid-cols-4 gap-4 py-10">
                  {users.map((usr  => (
                      <li className="bg-blue-950 shadow-md rounded-lg  text-red-500 p-3" key={usr.id}>
                          {usr.name} - {usr.address}
