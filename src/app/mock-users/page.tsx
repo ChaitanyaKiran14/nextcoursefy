@@ -1,5 +1,6 @@
 import axios from "axios";
 import { revalidatePath } from "next/cache";
+import { auth, currentUser } from "@clerk/nextjs/server";
 //this is to refresh the page when the user submits the form and refresh the page.
 
 type User =  {
@@ -8,6 +9,16 @@ type User =  {
     address : string;
 }
 const MockUsers = async  () => {
+    
+    //this is to get the current info about the logged in users info
+    const authObj = await auth()
+    const currentUserObj = await currentUser()
+    console.log({
+        authObj,
+        currentUserObj
+        
+    })
+
           try {
             const response = await axios.get<User[]>("https://6604f29b2ca9478ea17ed412.mockapi.io/api/contacts/contacts");
             const users = response.data
@@ -36,7 +47,7 @@ const MockUsers = async  () => {
                             <button type="submit" className="bg-blue-500 text-white rounded p-3 mr-3" >Add User</button>
                         </form>
                     </div>         
-                    <ul className="grid grid-cols-4 gap-4 py-10">
+                    <ul className="grid grid-cols-5 gap-5 py-10 m-5">
                  {users.map((usr  => (
                      <li className="bg-blue-950 shadow-md rounded-lg  text-red-500 p-3" key={usr.id}>
                          {usr.name} - {usr.address}
